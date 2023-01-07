@@ -10,6 +10,9 @@ export function HomeView(props) {
     if (isLoading) return <Text>Loading...</Text>
 
     return <ScrollView className='px-4 mt-4'>
-        <Group elements={facultiesData.data} navigate={navigation.navigate}/>
+        <Group elements={facultiesData.data} redirect={{
+            navigate: navigation.navigate,
+            viewName: "Fields"
+        }}/>
     </ScrollView>
 }

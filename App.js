@@ -4,6 +4,8 @@ import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {HomeView} from "./src/views/HomeView";
 import {QueryClient, QueryClientProvider} from "react-query";
 import {FieldsView} from "./src/views/FieldsView";
+import {SpecializationsView} from "./src/views/SpecializationsView";
+import {CalendarView} from "./src/views/CalendarView";
 
 const queryClient = new QueryClient()
 
@@ -16,6 +18,8 @@ export default function App() {
                 <Stack.Navigator>
                     <Stack.Screen name={"Home"} component={HomeView}/>
                     <Stack.Screen name={"Fields"} component={FieldsView}/>
+                    <Stack.Screen name={"Specializations"} component={SpecializationsView}/>
+                    <Stack.Screen name={"Calendar"} component={CalendarView}/>
                 </Stack.Navigator>
                 <StatusBar style="auto"/>
             </NavigationContainer>
