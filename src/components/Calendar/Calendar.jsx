@@ -1,5 +1,6 @@
 import {Text, View} from "react-native";
 import {Calendar as RNCalendar, Agenda, LocaleConfig} from 'react-native-calendars'
+import {useMemo} from "react";
 
 LocaleConfig.locales['pl'] = {
     monthNames: [
@@ -23,18 +24,36 @@ LocaleConfig.locales['pl'] = {
 }
 LocaleConfig.defaultLocale = 'pl'
 
-const lessonOne = {key: 'lessonOne', color: 'red'}
-const lessonTwo = {key: "lessonTwo", color: "purple"}
+export function Calendar(props) {
+    const {setSelectedDay, selectedDay, timetable} = props
 
-export function Calendar() {
+    const timetableMarked = useMemo(() => timetable?.reduce((obj, item) => Object.assign(obj, {
+        [item.start.split("T")[0]]: {
+            marked: true,
+            dotColor: "blue"
+        }
+    }), {}), [timetable])
+
+    const marked = useMemo(() => ({
+                ...timetableMarked,
+                [selectedDay]: {
+                    selected: true,
+                    selectedColor: 'blue',
+                    selectedTextColor: '#fff'
+                }
+            }
+
+        ),
+        [selectedDay, timetableMarked]
+    )
+
     return <View className='mt-2'>
         <RNCalendar
-            markingType={'multi-dot'}
-            markedDates={{
-                '2023-01-04': {dots: [lessonOne]},
-                "2023-01-03": {dots: [lessonOne, lessonTwo]}
-            }}
+            onDayPress={(day) =>
+                setSelectedDay(day.dateString)
+            }
+            markedDates={marked}
+            enableSwipeMonths
         />
-        {/*<Agenda items={{}} />*/}
     </View>
 }
