@@ -6,6 +6,7 @@ import {QueryClient, QueryClientProvider} from "react-query";
 import {FieldsView} from "./src/views/FieldsView";
 import {SpecializationsView} from "./src/views/SpecializationsView";
 import {CalendarView} from "./src/views/CalendarView";
+import {LecturersView} from "./src/views/LecturersView";
 
 const queryClient = new QueryClient()
 
@@ -20,6 +21,8 @@ export default function App() {
                     <Stack.Screen name={"Fields"} component={FieldsView}/>
                     <Stack.Screen name={"Specializations"} component={SpecializationsView}/>
                     <Stack.Screen name={"Calendar"} component={CalendarView}/>
+                    <Stack.Screen name={"Lecturers"} component={LecturersView} />
+                    <Stack.Screen name={"LecturerCalendar"} component={CalendarView}/>
                 </Stack.Navigator>
                 <StatusBar style="auto"/>
             </NavigationContainer>
