@@ -51,12 +51,6 @@ export function CalendarView(props) {
     setGroup(data?.data.timetable[0].group);
   }, [data]);
 
-  useEffect(() => {
-    RNCalendarEvents.checkPermissions((readOnly = false))
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
-  }, []);
-
   return (
     <View>
       {switchOptions && (
