@@ -1,16 +1,44 @@
-import {ScrollView,Text} from "react-native";
-import {Group} from "../../components/Group";
+import {FlatList, Pressable, ScrollView, Text, View} from "react-native";
 import {useGetLecturers} from "../../api/lecturers";
+import {useEffect, useState} from "react";
+import {SearchBar} from "../../components/SearchBar";
+import {Header} from "../../components/Header";
+import {Footer} from "../../components/Footer";
 
 export function LecturersView(props) {
-    const { navigation } = props
+    const {navigation} = props
+    const [searchTerm, setSearchTerm] = useState("")
+    const [lecturers, setLecturers] = useState([])
 
-    const { data: lecturersData, isLoading } = useGetLecturers()
+    const {data: lecturersData, isLoading} = useGetLecturers()
+
+    useEffect(() => {
+        if (!isLoading) setLecturers(lecturersData.data)
+    }, [lecturersData])
+
+    useEffect(() => {
+        if (searchTerm === "") {
+            setLecturers(lecturersData?.data)
+        } else {
+            setLecturers(lecturersData?.data?.filter((lecturer) =>
+                lecturer.toLowerCase().includes(searchTerm.toLowerCase()))
+            )
+        }
+    }, [searchTerm, lecturersData])
+
+    const renderItem = ({item}) => <Item item={item}/>
 
     if (isLoading) return <Text>Loading...</Text>
 
-    return <ScrollView>
-        <Group elements={lecturersData.data.data}}/>
-        <Text>Lecturers</Text>
+    return <ScrollView className='p-4'>
+        <Header/>
+        <SearchBar placeholder='Szukaj pracownika...' searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
+        <View>
+            {lecturers?.map((lecturer) =>
+                <Pressable key={lecturer} onPress={() => navigation.navigate("LecturerCalendar", {lecturer})}>
+                    <Text>{lecturer}</Text>
+                </Pressable>)}
+        </View>
+        <Footer/>
     </ScrollView>
 }
