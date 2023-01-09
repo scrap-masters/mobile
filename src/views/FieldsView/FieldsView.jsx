@@ -27,7 +27,7 @@ export function FieldsView(props) {
     if (isLoading) return <Text>Loading...</Text>
 
     return <ScrollView className='px-4 mt-4'>
-        <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
+        <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} placeholder="Szukaj kierunku..."/>
         <FieldsGroup elements={fields} redirect={{
             navigate: navigation.navigate,
             viewName: "Specializations"

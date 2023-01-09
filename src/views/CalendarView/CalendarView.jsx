@@ -5,9 +5,12 @@ import {
     useGetSpecializationTimetable
 } from "../../api/specializations";
 import {useEffect, useMemo, useState} from "react";
-import {Text, View} from "react-native";
+import {Pressable, Text, View} from "react-native";
 import SwitchSelector from "react-native-switch-selector";
 import {CalendarAgenda} from "../../components/CalendarAgenda";
+import {A} from '@expo/html-elements'
+
+const MyA = ({style, href, children}) => <A style={style} href={href}>{children}</A>
 
 export function CalendarView(props) {
     const {route} = props
@@ -19,7 +22,7 @@ export function CalendarView(props) {
 
     // const {data: legendData} = useGetSpecializationLegend(id)
 
-    // const {data: specializationData} = useGetSpecialization(id)
+    const {data: specializationData} = useGetSpecialization(id)
 
     const timetableData = data?.data.timetable
 
@@ -40,9 +43,17 @@ export function CalendarView(props) {
         setGroup(data?.data.timetable[0].group)
     }, [data])
 
+
     return <View>
         {switchOptions && <SwitchSelector options={switchOptions} initial={0} onPress={setGroup}/>}
+        <View className='justify-between items-center flex-row mt-2 mx-2'>
+            <Text className='text-xl font-semibold'>{specializationData?.data.name}</Text>
+            <MyA href={`https://plan.collegiumwitelona.com.pl/calendar/${id}/${group}`}
+                 className='bg-gray-500 p-2 rounded block text-white'>
+                Export to CSV
+            </MyA>
+        </View>
         <Calendar selectedDay={selectedDay} setSelectedDay={setSelectedDay} timetable={filteredTimetable}/>
-        <CalendarAgenda lessons={currentDayLessons} />
+        <CalendarAgenda lessons={currentDayLessons}/>
     </View>
 }
