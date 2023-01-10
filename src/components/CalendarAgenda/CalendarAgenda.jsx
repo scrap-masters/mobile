@@ -13,7 +13,7 @@ const Item = ({item, forLecturer}) => {
                 <Text className='ml-auto text-2xl font-bold'>{item.room}</Text>
             </View>
             <View>
-                <Text className='text-lg '>{forLecturer && item.group}</Text>
+                <Text className='text-lg'>{forLecturer && item.group}</Text>
             </View>
         </View>
     </View>

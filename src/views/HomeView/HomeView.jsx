@@ -13,7 +13,7 @@ export function HomeView(props) {
 
     return <ScrollView className='px-4'>
         <Header navigation={navigation} />
-        <Group elements={facultiesData.data} redirect={{
+        <Group elements={facultiesData?.data} redirect={{
             navigate: navigation.navigate,
             viewName: "Fields"
         }}/>
