@@ -22,13 +22,8 @@ const Item = ({item}) => {
 export function CalendarAgenda(props) {
     const {lessons} = props
 
-    const renderItem = ({item}) => (<Item item={item}/>)
-
-    return <FlatList
-        className='h-[370px]'
-        data={lessons}
-        renderItem={renderItem}
-        keyExtractor={item => item.id}
-    />
+    return <View>
+        {lessons.map((lesson) => <Item key={lesson.id} item={lesson}/>)}
+    </View>
 
 }

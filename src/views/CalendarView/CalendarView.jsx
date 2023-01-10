@@ -5,7 +5,7 @@ import {
     useGetSpecializationTimetable
 } from "../../api/specializations";
 import {useEffect, useMemo, useState} from "react";
-import {Pressable, Text, View} from "react-native";
+import {FlatList, Pressable, ScrollView, Text, View} from "react-native";
 import SwitchSelector from "react-native-switch-selector";
 import {CalendarAgenda} from "../../components/CalendarAgenda";
 import {A} from '@expo/html-elements'
@@ -20,7 +20,7 @@ export function CalendarView(props) {
 
     const {data} = useGetSpecializationTimetable(id)
 
-    // const {data: legendData} = useGetSpecializationLegend(id)
+    const {data: legendData} = useGetSpecializationLegend(id)
 
     const {data: specializationData} = useGetSpecialization(id)
 
@@ -44,7 +44,7 @@ export function CalendarView(props) {
     }, [data])
 
 
-    return <View>
+    return <ScrollView>
         {switchOptions && <SwitchSelector options={switchOptions} initial={0} onPress={setGroup}/>}
         <View className='justify-between items-center flex-row mt-2 mx-2'>
             <Text className='text-xl font-semibold'>{specializationData?.data.name}</Text>
@@ -55,5 +55,16 @@ export function CalendarView(props) {
         </View>
         <Calendar selectedDay={selectedDay} setSelectedDay={setSelectedDay} timetable={filteredTimetable}/>
         <CalendarAgenda lessons={currentDayLessons}/>
-    </View>
+        <View className='px-2'>
+            {legendData?.data?.legend.map((item) => (
+                <View className='flex-row' key={item.id}>
+                    <View className='w-1/4 p-2 border-2 border-gray-500 justify-center items-center'>
+                        <Text className='font-bold'>{item.slug}</Text>
+                    </View>
+                    <View className='w-3/4 p-2 border-y-2 border-r-2 border-gray-500'>
+                        <Text>{item.fullName}</Text>
+                    </View>
+                </View>))}
+        </View>
+    </ScrollView>
 }
