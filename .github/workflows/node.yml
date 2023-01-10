@@ -17,11 +17,12 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16.x
+          cache: npm
 
       - name: 📦 Install dependencies
         run: npm install
 
-      - name: Install expo-updates
+      - name: 📦 Install expo-updates
         run: npx expo install expo-updates
 
       - name: 🏗 Setup Expo
