@@ -32,11 +32,11 @@ jobs:
           token: ${{ secrets.EXPO_TOKEN }}
 
       - name: 🚀 Publish preview
-        if: github.event_name = 'pull_request'
+        if: ${{ github.event_name == 'pull_request'}}
         run: expo publish --release-channel=pr-${{ github.event.number }} --non-interactive
 
       - name: 💬 Comment preview
-        if: github.event_name = 'pull_request'
+        if: ${{ github.event_name == 'pull_request'}}
         uses: expo/expo-github-action/preview-comment@v7
         with:
           channel: pr-${{ github.event.number }}
