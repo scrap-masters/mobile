@@ -30,13 +30,13 @@ export function LecturersView(props) {
 
     if (isLoading) return <Text>Loading...</Text>
 
-    return <ScrollView className='p-4'>
+    return <ScrollView className='px-4'>
         <Header/>
         <SearchBar placeholder='Szukaj pracownika...' searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
-        <View>
+        <View className='min-h-[55vh]'>
             {lecturers?.map((lecturer) =>
-                <Pressable key={lecturer} onPress={() => navigation.navigate("LecturerCalendar", {lecturer})}>
-                    <Text>{lecturer}</Text>
+                <Pressable className='mb-1' key={lecturer} onPress={() => navigation.navigate("LecturerCalendar", {lecturer})}>
+                    <Text className='text-blue-500 font-medium text-xl'>{lecturer}</Text>
                 </Pressable>)}
         </View>
         <Footer/>

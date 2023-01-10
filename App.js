@@ -7,6 +7,7 @@ import {FieldsView} from "./src/views/FieldsView";
 import {SpecializationsView} from "./src/views/SpecializationsView";
 import {CalendarView} from "./src/views/CalendarView";
 import {LecturersView} from "./src/views/LecturersView";
+import {LecturerCalendarView} from "./src/views/LecturerCalendarView";
 
 const queryClient = new QueryClient()
 
@@ -17,12 +18,12 @@ export default function App() {
         <QueryClientProvider client={queryClient}>
             <NavigationContainer>
                 <Stack.Navigator>
-                    <Stack.Screen name={"Home"} component={HomeView}/>
-                    <Stack.Screen name={"Fields"} component={FieldsView}/>
-                    <Stack.Screen name={"Specializations"} component={SpecializationsView}/>
-                    <Stack.Screen name={"Calendar"} component={CalendarView}/>
-                    <Stack.Screen name={"Lecturers"} component={LecturersView} />
-                    <Stack.Screen name={"LecturerCalendar"} component={CalendarView}/>
+                    <Stack.Screen name={"Home"} component={HomeView} options={{title: "Collegium Witelona"}}/>
+                    <Stack.Screen name={"Fields"} component={FieldsView} options={{title: "Kierunki"}}/>
+                    <Stack.Screen name={"Specializations"} component={SpecializationsView} options={{title: "Specializacje"}}/>
+                    <Stack.Screen name={"Calendar"} component={CalendarView} options={{title: "Plan zajęć"}}/>
+                    <Stack.Screen name={"Lecturers"} component={LecturersView}  options={{title: "Pracownicy"}}/>
+                    <Stack.Screen name={"LecturerCalendar"} component={LecturerCalendarView} options={{title: "Plan zajęć"}}/>
                 </Stack.Navigator>
                 <StatusBar style="auto"/>
             </NavigationContainer>

@@ -3,6 +3,8 @@ import {useGetFacultyFields} from "../../api/faculties";
 import {FieldsGroup} from "../../components/FieldsGroup";
 import {SearchBar} from "../../components/SearchBar";
 import {useEffect, useState} from "react";
+import {Header} from "../../components/Header";
+import {Footer} from "../../components/Footer";
 
 export function FieldsView(props) {
     const {navigation, route} = props
@@ -26,11 +28,13 @@ export function FieldsView(props) {
 
     if (isLoading) return <Text>Loading...</Text>
 
-    return <ScrollView className='px-4 mt-4'>
+    return <ScrollView className='px-4'>
+        <Header navigation={navigation} />
         <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} placeholder="Szukaj kierunku..."/>
         <FieldsGroup elements={fields} redirect={{
             navigate: navigation.navigate,
             viewName: "Specializations"
         }}/>
+        <Footer />
     </ScrollView>
 }
